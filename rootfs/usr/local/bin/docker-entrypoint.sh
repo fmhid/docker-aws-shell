@@ -8,11 +8,18 @@ OUTPUT="${OUTPUT:-none}"
 PROFILENAME="${PROFILENAME:-none}"
 ROLEARN="${ROLEARN:-none}"
 
-checkdir () {
+checkdir() {
   if [ ! -d "${AWSPATH}" ]; then
     echo "====== CREATE AWS DIR ======="
     mkdir -p "${AWSPATH}"
   fi
+}
+
+createalias() {
+  tee /etc/profile.d/awsprofile <<EOF
+  alias aws-shell='aws-shell -p ${PROFILENAME}'
+EOF
+  source /etc/profile.d/awsprofile
 }
 
 checkvars() {
@@ -33,9 +40,11 @@ EOF
     source_profile = default
     region = ${REGION}
 EOF
+    
   else
   aws configure
   fi
+  createalias
 }
 
 checkvars
