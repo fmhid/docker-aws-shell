@@ -1,9 +1,9 @@
 FROM python:alpine
 
-LABEL Maintainer="Ernesto Pérez <ernesto.perez@euigs.com" \
+LABEL Maintainer="Ernesto Pérez <ernesto.perez@euigs.com && Francisco Moncayo <francisco.moncayo@euigs.com>" \
       Name="Docker AWS-Shell" \
-      Description="Docker image of aws-shell tool" \
-      Version="0.1.0"
+      Description="Docker image for aws-shell CLI tool" \
+      Version="0.1.2"
 
 RUN set -x \
     && apk add --upgrade \

@@ -5,26 +5,33 @@ set -eo pipefail
 AWSPATH="${AWSPATH:-$HOME/.aws}"
 REGION="${REGION:-none}"
 OUTPUT="${OUTPUT:-none}"
+PROFILENAME="${PROFILENAME:-none}"
+ROLEARN="${ROLEARN:-none}"
 
 checkdir () {
   if [ ! -d "${AWSPATH}" ]; then
     echo "====== CREATE AWS DIR ======="
-    mkdir -p ${AWSPATH}
+    mkdir -p "${AWSPATH}"
   fi
 }
 
 checkvars() {
-  if [ ! -z ${ACCESSKEY} ] && [ ! -z ${SECRETKEY} ] && [ ! -z ${REGION} ]; then
+  if [ ! -z "${ACCESSKEY}" ] && [ ! -z "${SECRETKEY}" ] && [ ! -z "${REGION}" ] && [ ! -z "${PROFILENAME}" ] && [ ! -z "${ROLEARN}" ]; then
     checkdir
-    tee ${AWSPATH}/credentials <<EOF
+    tee "${AWSPATH}"/credentials <<EOF
     [default]
     aws_access_key_id = ${ACCESSKEY}
     aws_secret_access_key = ${SECRETKEY}
 EOF
-    tee ${AWSPATH}/config <<EOF
+    tee "${AWSPATH}"/config <<EOF
     [default]
     region=${REGION}
     output=${OUTPUT}
+
+    [profile ${PROFILENAME}]
+    role_arn = ${ROLEARN}
+    source_profile = default
+    region = ${REGION}
 EOF
   else
   aws configure

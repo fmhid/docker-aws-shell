@@ -6,7 +6,7 @@ AWS Shell Dockerized
 ## Docker run command
 
 ```shell
-docker run --rm -ti westerus/aws-shell
+docker run --rm -ti fmeuigs/aws-shell
 ```
 
 ## Docker run variables
@@ -35,8 +35,10 @@ docker run --rm -ti westerus/aws-shell
 |Región América del Sur (São Paulo)|sa-east-1|
 |AWS GovCloud (EE.UU.)|us-gov-west-1|
 
+**PROFILENAME** (profilename)
+**ROLEARN** (role_arn)
 **OUTPUT** (Output format: none, text, json)
 
 ```shell
-docker run --rm -ti -e ACCESSKEY=******** -e SECRETKEY=******** -e REGION=eu-west-1 -e OUTPUT=json westerus/aws-shell
+docker run --rm -ti -e ACCESSKEY=******** -e SECRETKEY=******** -e REGION=eu-west-1 -e PROFILENAME=pepitolopeta -e ROLEARN=arn:aws:iam:123456:role/rolename -e OUTPUT=json fmeuigs/aws-shell
 ```
