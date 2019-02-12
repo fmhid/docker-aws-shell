@@ -16,10 +16,7 @@ checkdir() {
 }
 
 createalias() {
-  tee /etc/profile.d/awsprofile <<EOF
   alias aws-shell='aws-shell -p ${PROFILENAME}'
-EOF
-  source /etc/profile.d/awsprofile
 }
 
 checkvars() {
