@@ -44,9 +44,9 @@ EOF
   else
   aws configure
   fi
-  createalias
 }
 
 checkvars
+createalias
 
 exec "$@"
